@@ -18,7 +18,8 @@ export function initPanzoom(node: HTMLElement) {
     enableTextSelection: true,
     beforeMouseDown: (e) => {
       const nodeName = (e.target as HTMLElement).nodeName;
-      return nodeName === 'P';
+      const isTextBox = (e.target as HTMLElement).classList.contains("textBox");
+      return nodeName === 'P' || isTextBox;
     },
     beforeWheel: (e) => e.altKey,
     onTouch: (e) => e.touches.length > 1,

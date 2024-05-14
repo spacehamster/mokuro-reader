@@ -17,6 +17,7 @@
   $: toggles = [
     { key: 'rightToLeft', text: 'Right to left', value: settings.rightToLeft },
     { key: 'singlePageView', text: 'Single page view', value: settings.singlePageView },
+    { key: 'longstripView', text: 'Longstrip view', value: settings.longstripView },
     { key: 'hasCover', text: 'First page is cover', value: settings.hasCover }
   ] as { key: VolumeSettingsKey; text: string; value: any }[];
 

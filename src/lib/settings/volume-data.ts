@@ -8,6 +8,7 @@ import { manga, volume } from '$lib/catalog';
 export type VolumeSettings = {
   rightToLeft: boolean;
   singlePageView: boolean;
+  longstripView: boolean;
   hasCover: boolean;
 }
 
@@ -44,12 +45,13 @@ export function initializeVolume(volume: string) {
   if (!volumeDefaults) {
     updateSetting('volumeDefaults', {
       singlePageView: false,
+      longstripView: false,
       rightToLeft: true,
       hasCover: false
     })
   }
 
-  const { hasCover, rightToLeft, singlePageView } = volumeDefaults
+  const { hasCover, rightToLeft, singlePageView, longstripView } = volumeDefaults
   volumes.update((prev) => {
     return {
       ...prev,
@@ -61,7 +63,8 @@ export function initializeVolume(volume: string) {
         settings: {
           hasCover,
           rightToLeft,
-          singlePageView
+          singlePageView,
+          longstripView
         }
       }
     };

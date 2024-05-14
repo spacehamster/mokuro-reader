@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import Reader from '$lib/components/Reader/Reader.svelte';
+  import PageReader from '$lib/components/Reader/PageReader.svelte';
+  import LongstripReader from '$lib/components/Reader/LongstripReader.svelte';
   import Timer from '$lib/components/Reader/Timer.svelte';
   import { initializeVolume, settings, startCount, volumeSettings, volumes } from '$lib/settings';
   import { onMount } from 'svelte';
@@ -26,5 +27,10 @@
   {#if $settings.showTimer}
     <Timer bind:count {volumeId} />
   {/if}
-  <Reader volumeSettings={$volumeSettings[volumeId]} />
+  {#if $volumeSettings[volumeId].longstripView}
+    <LongstripReader volumeSettings={$volumeSettings[volumeId]} />
+  {/if}
+  {#if !$volumeSettings[volumeId].longstripView}
+    <PageReader volumeSettings={$volumeSettings[volumeId]} />
+  {/if}
 {/if}
