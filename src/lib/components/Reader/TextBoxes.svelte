@@ -74,6 +74,49 @@
       onUpdateCard(lines);
     }
   }
+  let dragState = {
+    active: false,
+    initialMouseX: 0,
+    initialMouseY: 0,
+    initialEleX: 0,
+    initialEleY: 0,
+    scale: 1
+  }
+  function onHover(event: MouseEvent) {
+    let ele = (event.currentTarget as HTMLInputElement);
+    if(event.ctrlKey && ele)
+    {
+      ele.style.cursor = "move";
+      ele.style.userSelect = "none";
+    } else if(ele) {
+      ele.style.cursor = "";
+      ele.style.userSelect = "";
+    }
+    if(event.ctrlKey && event.buttons == 1 && !dragState.active && ele.parentElement)
+    {
+      dragState.active = true;
+      dragState.initialEleX = parseFloat(ele.style.left);
+      dragState.initialEleY = parseFloat(ele.style.top);
+      dragState.initialMouseX = event.x;
+      dragState.initialMouseY = event.y;
+      let eleRect = ele.getBoundingClientRect();
+      let parentRect = ele.parentElement?.getBoundingClientRect();
+      let viewLeft = eleRect.left - parentRect.left;      
+      dragState.scale = viewLeft / dragState.initialEleX;
+    }
+    if(!event.ctrlKey || event.buttons != 1)
+    {
+      dragState.active = false;
+    }
+    if(event.ctrlKey && event.buttons == 1 && dragState.active)
+    {
+        event.preventDefault();
+        let newX = dragState.initialEleX - (dragState.initialMouseX - event.x) / dragState.scale;
+        let newY = dragState.initialEleY - (dragState.initialMouseY - event.y) / dragState.scale;
+        ele.style.left = `${newX}px`;
+        ele.style.top = `${newY}px`;
+    }
+  }
 </script>
 
 {#each textBoxes as { fontSize, height, left, lines, top, width, writingMode }, index (`textBox-${index}`)}
@@ -91,6 +134,7 @@
     role="none"
     on:contextmenu={(e) => onContextMenu(e, lines)}
     on:dblclick={(e) => onDoubleTap(e, lines)}
+    on:mousemove={(e) => onHover(e)}
     {contenteditable}
   >
     {#each lines as line}
