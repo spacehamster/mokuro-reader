@@ -53,7 +53,7 @@ function getDetails(file: File) {
   let path = filename
 
   if (webkitRelativePath) {
-    path = webkitRelativePath.split('.')[0]
+    path = webkitRelativePath.replace(/\.[^./]*$/, "");
   }
 
   return {
