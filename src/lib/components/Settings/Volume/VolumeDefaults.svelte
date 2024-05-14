@@ -9,6 +9,11 @@
       text: 'Single page view',
       value: $settings.volumeDefaults?.singlePageView
     },
+    {
+      key: 'longstripView',
+      text: 'Longstrip view',
+      value: $settings.volumeDefaults?.longstripView
+    },
     { key: 'hasCover', text: 'First page is cover', value: $settings.volumeDefaults?.hasCover }
   ] as { key: VolumeDefaultsKey; text: string; value: any }[];
 </script>

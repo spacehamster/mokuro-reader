@@ -37,6 +37,7 @@ export type AnkiConnectSettings = {
 export type VolumeDefaults = {
   rightToLeft: boolean;
   singlePageView: boolean;
+  longstripView: boolean;
   hasCover: boolean;
 }
 
@@ -88,6 +89,7 @@ const defaultSettings: Settings = {
   invertColors: false,
   volumeDefaults: {
     singlePageView: false,
+    longstripView: false,
     rightToLeft: true,
     hasCover: false
   },
