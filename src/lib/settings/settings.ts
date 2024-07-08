@@ -58,6 +58,7 @@ export type Settings = {
   quickActions: boolean;
   fontSize: FontSize;
   zoomDefault: ZoomModes;
+  invertColors: boolean;
   volumeDefaults: VolumeDefaults;
   ankiConnectSettings: AnkiConnectSettings;
 };
@@ -85,6 +86,7 @@ const defaultSettings: Settings = {
   quickActions: true,
   fontSize: 'auto',
   zoomDefault: 'zoomFitToScreen',
+  invertColors: false,
   volumeDefaults: {
     singlePageView: false,
     longstripView: false,
