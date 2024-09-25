@@ -148,7 +148,7 @@ export async function processFiles(_files: File[]) {
         let vol = ''
 
         Object.keys(volumes).forEach((key) => {
-          if (webkitRelativePath.startsWith(key)) {
+          if (webkitRelativePath.startsWith(key + '/')) {
             vol = key
           }
         })
