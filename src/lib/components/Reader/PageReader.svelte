@@ -313,7 +313,7 @@
     <p class="text-left" class:hidden={!$settings.charCount}>{charDisplay}</p>
     <p class="text-left" class:hidden={!$settings.pageNum}>{pageDisplay}</p>
   </button>
-  <div class="flex" style:background-color={$settings.backgroundColor}>
+  <div class="flex" style:outline-width={0} style:background-color={$settings.backgroundColor}>
     <Panzoom>
       <button
         class="h-full fixed -left-full z-10 w-full hover:bg-slate-400 opacity-[0.01]"
