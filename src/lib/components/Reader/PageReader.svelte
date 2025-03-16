@@ -101,6 +101,7 @@
     : `${page} / ${pages?.length}`;
 
   $: charDisplay = `${charCount} / ${maxCharCount}`;
+  $: showAll = false;
 
   function onInputClick(this: any) {
     this.select();
@@ -109,6 +110,13 @@
   function onManualPageChange() {
     changePage(manualPage, true);
   }
+  
+  function toggleShowAll() {
+    // This method causes screen zoom and position to reset
+    // TODO: Determine how to maintain screen zoom and position
+    showAll = !showAll;
+  }
+
 
   function handleShortcuts(event: KeyboardEvent & { currentTarget: EventTarget & Window }) {
     const action = event.code || event.key;
@@ -139,6 +147,9 @@
         return;
       case 'KeyF':
         toggleFullScreen();
+        return;
+      case 'KeyS':
+        toggleShowAll();
         return;
       default:
         break;
@@ -346,9 +357,9 @@
         id="manga-panel"
       >
         {#if showSecondPage()}
-          <MangaPage page={pages[index + 1]} src={Object.values(volume?.files)[index + 1]} />
+          <MangaPage page={pages[index + 1]} src={Object.values(volume?.files)[index + 1]} showAll={showAll} />
         {/if}
-        <MangaPage page={pages[index]} src={Object.values(volume?.files)[index]} />
+        <MangaPage page={pages[index]} src={Object.values(volume?.files)[index]} showAll={showAll} />
       </div>
     </Panzoom>
   </div>

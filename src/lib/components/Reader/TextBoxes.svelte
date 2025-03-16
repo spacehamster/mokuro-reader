@@ -6,6 +6,7 @@
 
   export let page: Page;
   export let src: File;
+  export let showAll: boolean;
 
   $: textBoxes = page.blocks
     .map((block) => {
@@ -121,6 +122,7 @@
 {#each textBoxes as { fontSize, height, left, lines, top, width, writingMode }, index (`textBox-${index}`)}
   <div
     class="textBox"
+    class:show-all={showAll}
     style:width
     style:height
     style:left
@@ -169,6 +171,10 @@
     background-color: rgb(255, 255, 255);
     font-weight: var(--bold);
     z-index: 11;
+  }
+
+  .show-all p {
+    display: table;
   }
 
   .textBox:focus p,

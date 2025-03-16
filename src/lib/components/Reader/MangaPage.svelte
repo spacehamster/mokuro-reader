@@ -6,6 +6,7 @@
 
   export let page: Page;
   export let src: File;
+  export let showAll: boolean;
 
   $: url = src ? `url(${URL.createObjectURL(src)})` : '';
 
@@ -40,5 +41,5 @@
   style:background-image={url}
   class="relative"
 >
-  <TextBoxes {page} {src} />
+  <TextBoxes {page} {src} {showAll} />
 </div>
