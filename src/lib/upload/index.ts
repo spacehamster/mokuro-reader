@@ -174,9 +174,17 @@ export async function processFiles(_files: File[]) {
         return;
       }
 
+      // This is a hack to work around the fact that mokuro reader fetches images by index rather then image name.
+      // If the .zip file contains images that are not in the .mokuro file,
+      // the ocr text and images will fall out of sync.
+      // This can happen if image files are deleted before processing by mokuro
+      const filteredFiles = Object.fromEntries(
+        Object.entries(unzippedFiles).filter(([key]) => volumes[path].mokuroData.pages.some(page => page.img_path == key))
+      );
+
       volumes[path] = {
         ...volumes[path],
-        files: unzippedFiles
+        files: filteredFiles
       };
 
       continue;
